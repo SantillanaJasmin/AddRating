@@ -5,11 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,19 +27,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onYesSelected(float rate, String comment) {
-        int booking_id = 3;
+        int booking_id = 1;
 
-        JSONObject rating = new JSONObject();
-        try {
-            rating.put("booking_id", booking_id);
-            rating.put("rate", rate);
-            rating.put("comment", comment);
+//        Toast.makeText(getBaseContext(), "Rate: " + rate + "\tComment: " + comment, Toast.LENGTH_SHORT).show();
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        Toast.makeText(getBaseContext(), rating.toString(), Toast.LENGTH_LONG).show();
-//        new AddRatingAsyncTask().execute(String.valueOf(booking_id), String.valueOf(rate), comment);
+        new AddRatingAsyncTask().execute(String.valueOf(booking_id), String.valueOf(((int) rate)), comment);
     }
 }

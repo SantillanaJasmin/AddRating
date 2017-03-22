@@ -11,6 +11,7 @@ import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * Created by Jasmin on 3/22/2017.
@@ -22,12 +23,12 @@ public class AddRatingAsyncTask extends AsyncTask<String, Void, Void> {
 
     @Override
     protected Void doInBackground(String... params) {
-        String url = "http://192.168.2.52:3004/carwash/rate/retrieve";
+        String url = "http://192.168.2.52:3004/carwash/rate";
 
         JSONObject rating = new JSONObject();
         try {
             rating.put("booking_id", Integer.parseInt(params[0]));
-            rating.put("rate", Float.parseFloat(params[1]));
+            rating.put("rate", Integer.parseInt(params[1]));
             rating.put("comment", params[2]);
 
         } catch (JSONException e) {
@@ -45,7 +46,6 @@ public class AddRatingAsyncTask extends AsyncTask<String, Void, Void> {
                 .build();
 
         try {
-            //the request will be executed and the response - a JSON Object -  will be stored to String 'sResult'
             client.newCall(requestRating).execute();
         } catch (IOException e) {
             e.printStackTrace();
